@@ -36,6 +36,16 @@ def inserir_tabela(conexao, sql):
     except:
         print("Registro Não Inserido")
 
+def atualizar_tabela(conexao, sql):
+    try:
+        c = con.cursor()
+        c.execute(sql)
+        con.commit()
+        print("Registro alterado ")
+       
+    except:
+        print("Não foi possivel alterar o registro")
+
 def inserir_tabelas():
  op = 0
  while(op !=10):
@@ -97,6 +107,61 @@ def inserir_tabelas():
          insere ="INSERT INTO ingresso (cod_ingresso, cod_cliente, cod_sessao, quantidade_inteira, quantidade_meia, forma_pagamento)VALUES('"+cod_ingresso+"','"+cod_cliente+"','"+cod_sessao+"','"+quant_inteira+"','"+quant_meia+"','"+f_pagamento+"')"
          inserir_tabela(mycursor,insere)
 
+def atualizar_tabelas():
+ op = 0
+ while(op !=10):
+    print("****************")
+    print("[1] Alterar dados da tabela cliente")
+    print("[2] Alterar dados da tabela funcionário")
+    print("[3] Alterar dados da tabela cinema")
+    print("[4] Alterar dados da tabela filme")
+    print("[5] Alterar dados da tabela sessao")
+    print("[6] Alterar dados da tabela ingresso")
+    op =int (input("Op = "))
+    if(op ==1):
+        coluna = input("Digite o nome da coluna  que voce deseja alterar: ")
+        valor = input("Digite o valor novo: ")
+        codigo = input("Digite o codigo que corresponde a coluna: ")
+        insere = "UPDATE clientes SET "+coluna+" = '"+valor+"' WHERE cod_cliente = "+codigo+""
+        print(insere)
+        atualizar_tabela(mycursor,insere)
+    if(op ==2):
+        coluna = input("Digite o nome da coluna  que voce deseja alterar: ")
+        valor = input("Digite o valor novo: ")
+        codigo = input("Digite o codigo que corresponde a coluna: ")
+        insere = "UPDATE funcionarios SET "+coluna+" = '"+valor+"' WHERE cod_funcionario = "+codigo+""
+        print(insere)
+        atualizar_tabela(mycursor,insere)
+    if(op ==3):
+        coluna = input("Digite o nome da coluna  que voce deseja alterar: ")
+        valor = input("Digite o valor novo: ")
+        codigo = input("Digite o codigo que corresponde a coluna: ")
+        insere = "UPDATE cinema SET "+coluna+" = '"+valor+"' WHERE cod_cinema = "+codigo+""
+        print(insere)
+        atualizar_tabela(mycursor,insere)
+    if(op ==4):
+        coluna = input("Digite o nome da coluna  que voce deseja alterar: ")
+        valor = input("Digite o valor novo: ")
+        codigo = input("Digite o codigo que corresponde a coluna: ")
+        insere = "UPDATE filme SET "+coluna+" = '"+valor+"' WHERE cod_filme = "+codigo+""
+        print(insere)
+        atualizar_tabela(mycursor,insere)
+    if(op ==5):
+        coluna = input("Digite o nome da coluna  que voce deseja alterar: ")
+        valor = input("Digite o valor novo: ")
+        codigo = input("Digite o codigo que corresponde a coluna: ")
+        insere = "UPDATE sessao SET "+coluna+" = '"+valor+"' WHERE cod_sessao = "+codigo+""
+        print(insere)
+        atualizar_tabela(mycursor,insere)
+    if(op ==2):
+        coluna = input("Digite o nome da coluna  que voce deseja alterar: ")
+        valor = input("Digite o valor novo: ")
+        codigo = input("Digite o codigo que corresponde a coluna: ")
+        insere = "UPDATE ingressos SET "+coluna+" = '"+valor+"' WHERE cod_ingresso = "+codigo+""
+        print(insere)
+        atualizar_tabela(mycursor,insere)
+
+
 def imprimir_dados_tabela():
  op = 0
  while(op !=10):
@@ -140,6 +205,8 @@ def menu():
     op =int (input("Op = "))
     if(op ==1):
          inserir_tabelas()
+    if(op ==2):
+         atualizar_tabelas()
     if(op==6):
         imprimir_dados_tabela()
 if(__name__ == '__main__'):
