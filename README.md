@@ -57,7 +57,7 @@ Onde o usuário pudesse acessar os filmes disponível e comprar seu ingresso.
 
 * Metodologia Scrum/Sprint.
 
-## Cronograma do projeto ⏳
+## ⏳ Cronograma do projeto 
 * Etapa 1: Construção da definição do banco de dados e sua descrição.
 * Etapa 2: Contrução do diagrama entidade e relacionamento do banco de dados.
 * Etapa 3: Construção do dicionário dos dados.
