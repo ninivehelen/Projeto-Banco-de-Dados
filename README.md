@@ -27,7 +27,7 @@ Aplicação para sistema de gerenciamento de um cinema.
 </table>
 
 ## 📝 Documentação do sistema de gerenciamento de cinema.
-* Construção do DER (diagrama entidade e relacionamento): <img align="center" alt="HTML" height="300" width="600" src="https://github.com/Josefreitas788/AADC-DF/blob/main/docs/img/pagina_trabalho.png"></center>
+* Construção do DER (diagrama entidade e relacionamento): <.img align="center" alt="HTML" height="300" width="600" src="link_imagem"></center>
 * Contrução do Dicionário dos dados:   [Flex Grid](https://github.com/belyaraujo)
 * Construção do caso de uso do sistema: [Flex Grid](https://github.com/belyaraujo)
 
