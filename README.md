@@ -1,5 +1,5 @@
 # Projeto Banco de dados- Cinema 📚💻
-Aplicação para sistema de gerenciamento de um cinema.
+Aplicação para sistema de gerenciamento para um cinema.
 
 ## 🚀 Começando
 ![GitHub top language](https://img.shields.io/github/languages/top/ninivehelen/Projeto-Banco-de-Dados?style=for-the-badge)
@@ -26,14 +26,11 @@ Aplicação para sistema de gerenciamento de um cinema.
        
 </table>
 
-## 📝 Documentação do sistema de gerenciamento de cinema.
+## 📝 Documentação do sistema de gerenciamento para um cinema.
 * Construção do DER (diagrama entidade e relacionamento): <.img align="center" alt="HTML" height="300" width="600" src="link_imagem"></center>
 * Contrução do Dicionário dos dados:   [Flex Grid](https://github.com/belyaraujo)
 * Construção do caso de uso do sistema: [Flex Grid](https://github.com/belyaraujo)
-
-## ✍ Justificativa da quantidade de integrantes do projeto
-
-A equipe é composta por duas pessoas.  
+ 
 ## 🎯 Objetivos
 
 O objetivo principal é desenvolver um sistema de gerenciamento para um cinema. Ultizando o mysql para a construção do banco de dados</br> e a linguagem python para conexão com o banco de dados e construção da interface. 
