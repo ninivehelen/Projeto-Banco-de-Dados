@@ -13,7 +13,7 @@ create table filme(
 cod_filme numeric(5) primary key,
 titulo char(30) not null,
 genero char(30) not null,
-duracao time not null
+duracao char(30) not null
 );
 
 
@@ -23,8 +23,8 @@ cod_filme numeric (5) not null,
 cod_cinema numeric(5),
 constraint fk_cod_filme FOREIGN KEY (cod_filme) REFERENCES filme(cod_filme),
 constraint fk_cod_cinema FOREIGN KEY (cod_cinema) REFERENCES cinema(cod_cinema),
-data date not null,
-hora time not null,
+data char(30) not null,
+hora char(30) not null,
 preco double(5,2) not null
 );
 
@@ -42,8 +42,7 @@ cod_cliente numeric(5),
 cod_sessao numeric(5) not null,
 constraint fk_cod_cliente FOREIGN KEY (cod_cliente) REFERENCES clientes(cod_cliente),
 constraint fk_cod_sessao FOREIGN KEY (cod_sessao) REFERENCES sessao(cod_sessao),
-quantidade_inteira numeric(10) not null,
-quantidade_meia numeric(10) not null,
+quantidade_ingressos numeric(10) not null,
 forma_pagamento char(5) not null
 );
 
@@ -55,3 +54,31 @@ cidade char(30) not null,
 telefone numeric(20) not null
 );
 
+
+DELIMITER $
+CREATE TRIGGER capacidade_sala AFTER INSERT ON ingresso
+FOR EACH ROW
+BEGIN
+	update cinema C
+    inner join ingresso I
+    on C.cod_sessao = I.cod_sessao
+    set capacidade = capacidade - quantidade_ingresso;
+END $
+DELIMITER ;
+
+
+DELIMITER %
+CREATE PROCEDURE salario_funcionario(cod_funcionario numeric(5))
+begin
+   alter table funcionarios add salario numeric(5) null;
+end%
+DELIMITER ;
+
+CREATE FUNCTION desconto (parametro numeric(5))
+RETURNS NUMERIC(5,2) DETERMINISTIC
+RETURN (
+UPDATE cinema C
+    inner join ingresso I
+    on C.cod_sessao = I.cod_sessao
+    set preco = preco - (preco * 1.2)
+    where quantidade_ingresso >= 5);
