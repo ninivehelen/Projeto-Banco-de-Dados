@@ -67,17 +67,14 @@ END $
 DELIMITER ;
 
 
-DELIMITER %
-CREATE PROCEDURE salario_funcionario(cod_funcionario numeric(5))
-begin
-   alter table funcionarios add salario numeric(5) null;
-end%
-DELIMITER ;
+DELIMITER
+CREATE PROCEDURE selecionar_clientes(IN quantidade INT)
+BEGIN SELECT * FROM clientes
+LIMIT
+quantidade;
+END
 
-CREATE FUNCTION ver_filme_hora (titulo char(30))
-RETURNS numeric(60) DETERMINISTIC
-RETURN
-(select titulo, hora
-from filme F inner join sessao S on F.cod_filme = S.cod_filme
-where titulo=titulo
-    );
+CREATE FUNCTION ver_filme_hora(titulo char(30))
+RETURNS VARCHAR(60) DETERMINISTIC 
+RETURN (SELECT CONCAT(F.titulo,  S.hora) from filme F inner join sessao S on F.cod_filme = S.cod_filme
+where titulo=F.titulo)

@@ -19,10 +19,8 @@ def imprimir_tabela(conexao, sql):
         c = con.cursor()
         c.execute(sql)
         tabela = c.fetchall()
-        print(tabela)
         for tabelas in tabela:
-          print("\n")   
-          print(tabelas) 
+          print("\n",tabelas) 
     except:
         print("Não foi possível imprimir os dados da tabela")
 
@@ -36,6 +34,26 @@ def view_tabela(conexao, sql):
     except:
         print("Não foi possivel criar a view de gastos dos clientes")
 
+def create_function(conexao, sql):
+    try:
+        c = con.cursor()
+        c.execute(sql)
+        con.commit()
+        print("Function para visualizar horario do filme criada")
+       
+    except:
+        print("Não foi possivel criar a function de visualizar horaáio do filme")
+
+
+def create_procedure(conexao, sql):
+    try:
+        c = con.cursor()
+        c.execute(sql)
+        con.commit()
+        print("Procedure para visualizar os clientes criado")
+    except:
+        print("Não foi possível criar o procedure para visualizar os clientes")
+
 def inserir_tabela(conexao, sql):
     try:
         c = con.cursor()
@@ -44,7 +62,7 @@ def inserir_tabela(conexao, sql):
         print("Registro Inserido")
        
     except:
-        print("Registro Não Inserido")
+        print("Registro não Inserido")
 
 def atualizar_tabela(conexao, sql):
     try:
@@ -54,7 +72,7 @@ def atualizar_tabela(conexao, sql):
         print("Registro alterado ")
        
     except:
-        print("Não foi possivel alterar o registro")
+        print("Não foi possível alterar o registro")
 
 def excluir_dado(conexao, sql):
     try:
@@ -63,7 +81,7 @@ def excluir_dado(conexao, sql):
         con.commit()
         print("Dado excluído ")
     except:
-        print("Não foi possivel excluir o dado")
+        print("Não foi possível excluir o dado")
 
 def inserir_tabelas():
  op = 0
@@ -121,10 +139,9 @@ def inserir_tabelas():
          cod_ingresso = input("Digite o código do ingresso: ")
          cod_cliente = input("Digite  o código do do cliente : ")
          cod_sessao = input("Digite o código da sessao : ")
-         quant_inteira = input("Digite a quantidade da inteira do ingresso: ")
-         quant_meia = input("Digite a quantidade da meia do ingresso: ")
+         quant_ingresso = input("Digite a quantidade de ingresos: ")
          f_pagamento = input("Digite a forma de pagamento: ")
-         insere ="INSERT INTO ingresso (cod_ingresso, cod_cliente, cod_sessao, quantidade_inteira, quantidade_meia, forma_pagamento)VALUES('"+cod_ingresso+"','"+cod_cliente+"','"+cod_sessao+"','"+quant_inteira+"','"+quant_meia+"','"+f_pagamento+"')"
+         insere ="INSERT INTO ingresso (cod_ingresso, cod_cliente, cod_sessao, quantidade_ingressos, forma_pagamento)VALUES('"+cod_ingresso+"','"+cod_cliente+"','"+cod_sessao+"','"+quant_ingresso+"','"+f_pagamento+"')"
          inserir_tabela(mycursor,insere)
     if(op == 7):
         menu()
@@ -190,8 +207,32 @@ def view_tabelas():
  op = 0
  while(op !=10):
     print("######## View de Gastos dos Clientes ##########")
-    insere="CREATE VIEW gastos_clientes_ingresso10 AS SELECT C.cod_cliente, C.nome, SUM(I.quantidade_inteira * S.preco) AS TOTAL FROM clientes C INNER JOIN ingresso I ON C.cod_cliente = I.cod_cliente INNER JOIN sessao S on S.cod_sessao = I.cod_sessao  GROUP BY C.cod_cliente, C.nome"
+    insere="CREATE VIEW gastos_clientes_ingresso AS SELECT C.cod_cliente, C.nome, SUM(I.quantidade_inteira * S.preco) AS TOTAL FROM clientes C INNER JOIN ingresso I ON C.cod_cliente = I.cod_cliente INNER JOIN sessao S on S.cod_sessao = I.cod_sessao  GROUP BY C.cod_cliente, C.nome"
     view_tabela(mycursor,insere)
+    print("[7] Para voltar ao menu inicial")
+    op =int (input("Op = "))
+    if(op == 7):
+       menu()
+
+def create_functions():
+ op = 0
+ while(op !=10):
+    print("######## View de Gastos dos Clientes ##########")
+    insere = "CREATE FUNCTION ver_filme_hora(titulo char(30))RETURNS VARCHAR(60) DETERMINISTIC RETURN (SELECT CONCAT(F.titulo,  S.hora) from filme F inner join sessao S on F.cod_filme = S.cod_filme where titulo=F.titulo);"
+    print()
+    create_function(mycursor,insere)
+    print("[7] Para voltar ao menu inicial")
+    op =int (input("Op = "))
+    if(op == 7):
+       menu()
+
+def create_procedures():
+ op = 0
+ while(op !=10):
+    print("######## Procedure de Selecionar dados com limite  ##########")
+    insere =  "DELIMITER\nCREATE PROCEDURE selecionar_clientes(IN quantidade INT)\nBEGIN SELECT * FROM clientes\nLIMIT\nquantidade;\nEND"
+    print(insere)
+    create_procedure(mycursor,insere)
     print("[7] Para voltar ao menu inicial")
     op =int (input("Op = "))
     if(op == 7):
@@ -202,7 +243,34 @@ def imprimir_view_clientes():
  while(op !=10):
     print("######## Imprimir  a view de gastos dos clientes ##########")
     print("[7] Para voltar ao menu inicial")
-    insere="SELECT *FROM gastos_clientes_ingresso10"
+    insere="SELECT *FROM gastos_clientes_ingresso"
+    imprimir_tabela(mycursor,insere)
+    op =int (input("Op = "))
+    if(op ==7):
+       menu()
+
+
+def imprimir_function():
+ op = 0
+ while(op !=10):
+    print("######## Imprimir  a view de gastos dos clientes ##########")
+    print("[7] Para voltar ao menu inicial")
+    nome_filme = input("Digite  o titulo do filme que deseja saber o horário: ")
+    insere="select ver_filme_hora('"+nome_filme+"')"
+    print(insere)
+    imprimir_tabela(mycursor,insere)
+    op =int (input("Op = "))
+    if(op ==7):
+       menu()
+
+def imprimir_procedure():
+ op = 0
+ while(op !=10):
+    print("######## Imprimir  o procedure com limite dos dados da tabela ingresso ##########")
+    print("[7] Para voltar ao menu inicial")
+    limite= input("Digite o limite que deseja imprimir: ")
+    insere="CALL selecionar_clientes("+limite+")"
+    print(insere)
     imprimir_tabela(mycursor,insere)
     op =int (input("Op = "))
     if(op ==7):
@@ -222,38 +290,30 @@ def excluir_dados():
     if(op ==1):
         codigo = input("Digite o codigo do cliente que deseja exclui: ")
         insere = "DELETE FROM clientes WHERE cod_cliente = "+codigo+""
-        print(insere)
         excluir_dado(mycursor,insere)
     if(op ==2):
         codigo = input("Digite o codigo do funcionário que deseja exclui: ")
         insere = "DELETE FROM funcionarios  WHERE cod_funcionario = "+codigo+""
-        print(insere)
         excluir_dado(mycursor,insere)
     if(op ==3):
         codigo = input("Digite o codigo do cinema que deseja exclui: ")
         insere = "DELETE FROM cinema WHERE cod_cinema = "+codigo+""
-        print(insere)
         excluir_dado(mycursor,insere)
     if(op ==4):
         codigo = input("Digite o codigo do filme que deseja exclui: ")
         insere = "DELETE FROM filme WHERE cod_filme = "+codigo+""
-        print(insere)
         excluir_dado(mycursor,insere)
     if(op ==5):
         codigo = input("Digite o codigo da sessao que deseja exclui: ")
         insere = "DELETE FROM sessao WHERE cod_sessao = "+codigo+""
-        print(insere)
         excluir_dado(mycursor,insere)
     if(op ==6):
         codigo = input("Digite o codigo do ingresso que deseja exclui: ")
         insere = "DELETE FROM ingresso WHERE cod_ingresso = "+codigo+""
-        print(insere)
         excluir_dado(mycursor,insere)
     if(op == 7):
         menu()
 
-    
-        
 def imprimir_dados_tabela():
  op = 0
  while(op !=10):
@@ -289,14 +349,23 @@ def imprimir_dados_tabela():
     
 def menu():
  op = 0
- while(op !=10):
+ while(op !=13):
+    print("#################################################")
     print("######## Menu Inicial ##########")
-    print("[1] Inserir dados nas tabelas")
-    print("[2] Atualizar dados das tabelas")
-    print("[3] Excluir dados das tabelas")
-    print("[4] Criar a view de gastos dos clientes")
-    print("[5] Imprimir a view de gastos dos clientes")
-    print("[6] Imprimir informações das tabelas")
+    print("[1]  Inserir dados nas tabelas")
+    print("[2]  Atualizar dados das tabelas")
+    print("[3]  Excluir dados das tabelas")
+    print("[4]  Criar a view de gastos dos clientes")
+    print("[5]  Imprimir a view de gastos dos clientes")
+    print("[6]  Criar o tigger")
+    print("[7]  Imprimir o tigger")
+    print("[8]  Criar o procedure")
+    print("[9]  Imprimir o procedure")
+    print("[10]  Cria função ")
+    print("[11]  Imprimir função")
+    print("[12] Imprimir informações das tabelas")
+    print("[13] Para sair do sistema")
+    print("#################################################")
     op =int (input("Op = "))
     if(op ==1):
          inserir_tabelas()
@@ -308,7 +377,19 @@ def menu():
          view_tabelas()
     if(op == 5):
         imprimir_view_clientes()
-    if(op==6):
+    if(op == 6):
+        print("Falta ser imprementado a criaçao da tigger")
+    if(op == 7):
+        print("Falta ser imprementado função imprimir tigger")
+    if(op==8):
+        create_procedures()
+    if(op==9):
+       imprimir_procedure()
+    if(op==10):
+        create_functions()
+    if(op==11):
+        imprimir_function()
+    if(op==12):
         imprimir_dados_tabela()
 if(__name__ == '__main__'):
    menu()
