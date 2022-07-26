@@ -28,7 +28,7 @@ Aplicação para sistema de gerenciamento para um cinema.
 
 ## 📝 Documentação do sistema de gerenciamento para um cinema.
 * Construção do DER Diagrama entidade e relacionamento: [Diagrama dos dados](https://www.figma.com/file/d2DcB1q7SleyalUJTdpRyn/Banco-de-dados-cinema?node-id=0%3A1)
-* Contrução do Descrição dos banco de dados: [Descrição dos banco de dados](https://docs.google.com/document/d/1nODcV88rDYoq7ES54ozJBzjsdOP9EjSGUZw6UjSkUKU/edit?usp=sharing)
+* Contrução da Descrição do banco de dados: [Descrição dos banco de dados](https://docs.google.com/document/d/1nODcV88rDYoq7ES54ozJBzjsdOP9EjSGUZw6UjSkUKU/edit?usp=sharing)
 * Contrução do Dicionário do dados:   [Dicionário do dados](https://docs.google.com/document/d/1DIds8uJ1bkXEIlNZL8hXfQHIdC5uxQQDkR6N_EvCCZg/edit?usp=sharing)
 * Construção do Caso de uso do sistema: [Caso de uso do sistema](https://github.com/belyaraujo)
  
