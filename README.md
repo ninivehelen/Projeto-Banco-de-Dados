@@ -27,8 +27,9 @@ Aplicação para sistema de gerenciamento para um cinema.
 </table>
 
 ## 📝 Documentação do sistema de gerenciamento para um cinema.
+* Contrução do Descrição dos banco de dados: [Flex Grid](https://docs.google.com/document/d/1nODcV88rDYoq7ES54ozJBzjsdOP9EjSGUZw6UjSkUKU/edit?usp=sharing)
 * Construção do DER (diagrama entidade e relacionamento): <.img align="center" alt="HTML" height="300" width="600" src="link_imagem"></center>
-* Contrução do Dicionário dos dados:   [Flex Grid](https://github.com/belyaraujo)
+* Contrução do Dicionário dos dados:   [Flex Grid](https://docs.google.com/document/d/1DIds8uJ1bkXEIlNZL8hXfQHIdC5uxQQDkR6N_EvCCZg/edit?usp=sharing)
 * Construção do caso de uso do sistema: [Flex Grid](https://github.com/belyaraujo)
  
 ## 🎯 Objetivos
