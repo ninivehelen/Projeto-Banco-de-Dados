@@ -74,11 +74,10 @@ begin
 end%
 DELIMITER ;
 
-CREATE FUNCTION desconto (parametro numeric(5))
-RETURNS NUMERIC(5,2) DETERMINISTIC
-RETURN (
-UPDATE cinema C
-    inner join ingresso I
-    on C.cod_sessao = I.cod_sessao
-    set preco = preco - (preco * 1.2)
-    where quantidade_ingresso >= 5);
+CREATE FUNCTION ver_filme_hora (titulo char(30))
+RETURNS numeric(60) DETERMINISTIC
+RETURN
+(select titulo, hora
+from filme F inner join sessao S on F.cod_filme = S.cod_filme
+where titulo=titulo
+    );
