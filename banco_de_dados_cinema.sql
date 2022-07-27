@@ -69,12 +69,12 @@ END $
 DELIMITER ;
 
 
-DELIMITER
+DELIMITER $$
 CREATE PROCEDURE selecionar_clientes(IN quantidade INT)
 BEGIN SELECT * FROM clientes
 LIMIT
 quantidade;
-END
+END $$
 
 CREATE FUNCTION ver_filme_hora(titulo char(30))
 RETURNS VARCHAR(60) DETERMINISTIC 
