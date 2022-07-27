@@ -60,9 +60,11 @@ CREATE TRIGGER capacidade_sala AFTER INSERT ON ingresso
 FOR EACH ROW
 BEGIN
 	update cinema C
-    inner join ingresso I
-    on C.cod_sessao = I.cod_sessao
-    set capacidade = capacidade - quantidade_ingresso;
+    inner join sessao S
+    on C.cod_cinema= S.cod_cinema
+    INNER JOIN ingresso I
+    on I.cod_sessao = S.cod_sessao
+    set capacidade = capacidade - quantidade_ingressos;
 END $
 DELIMITER ;
 
@@ -78,3 +80,14 @@ CREATE FUNCTION ver_filme_hora(titulo char(30))
 RETURNS VARCHAR(60) DETERMINISTIC 
 RETURN (SELECT CONCAT(F.titulo,  S.hora) from filme F inner join sessao S on F.cod_filme = S.cod_filme
 where titulo=F.titulo)
+
+
+insert into clientes values (2,'pedro',12345, 'M', 98765);
+
+insert into cinema values (2,'cineflix',12, 14, 'brasilia');
+
+insert into filme values (2,'vingadores','ação e aventura', '2');
+
+insert into ingresso values (2,2,2,5,'c');
+
+insert into sessao values(2,2,2, '27/07/2022','14h','15');
