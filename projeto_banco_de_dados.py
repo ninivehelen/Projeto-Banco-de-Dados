@@ -207,7 +207,7 @@ def view_tabelas():
  op = 0
  while(op !=10):
     print("######## View de Gastos dos Clientes ##########")
-    insere="CREATE VIEW gastos_clientes_ingresso AS SELECT C.cod_cliente, C.nome, SUM(I.quantidade_inteira * S.preco) AS TOTAL FROM clientes C INNER JOIN ingresso I ON C.cod_cliente = I.cod_cliente INNER JOIN sessao S on S.cod_sessao = I.cod_sessao  GROUP BY C.cod_cliente, C.nome"
+    insere="CREATE VIEW gastos_clientes_ingresso AS SELECT C.cod_cliente, C.nome, SUM(I.quantidade_ingressos * S.preco) AS TOTAL FROM clientes C INNER JOIN ingresso I ON C.cod_cliente = I.cod_cliente INNER JOIN sessao S on S.cod_sessao = I.cod_sessao  GROUP BY C.cod_cliente, C.nome"
     view_tabela(mycursor,insere)
     print("[7] Para voltar ao menu inicial")
     op =int (input("Op = "))
