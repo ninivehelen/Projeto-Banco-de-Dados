@@ -2,7 +2,7 @@ import mysql.connector
 import os
 from time import sleep
 from datetime import datetime
-con = mysql.connector.connect(host='localhost',database='cinema',user='root',password='nHH36232585@')
+con = mysql.connector.connect(host='localhost',database='cinema',user='root',password='password@')
 if con.is_connected():
     db_info = con.get_server_info()
     print("Conectado ao servidor MySQL versão ",db_info)
